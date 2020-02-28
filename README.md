@@ -5,3 +5,11 @@ Data provided from [Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE](ht
 Launch main class and navigate to:
 
     http://localhost:8080
+    
+Home page should look like:
+
+![Home page](tracker-app-look.png)    
+    
+##### to do list
+
+- [ ] add tests    
