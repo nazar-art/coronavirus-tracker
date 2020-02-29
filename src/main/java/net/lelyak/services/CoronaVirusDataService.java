@@ -71,10 +71,9 @@ public class CoronaVirusDataService {
                     .diffFromPrevDay(localCases - prevDayCases)
                     .build();
 
-            log.debug("PARSED_STAT: {}", locationStat);
             newStats.add(locationStat);
         }
-        // lastly save all results
+//        log.debug("PARSED_STAT: {}", newStats);
         this.allStats = newStats;
     }
 }

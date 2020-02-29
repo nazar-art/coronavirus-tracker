@@ -16,7 +16,9 @@
 
     <div class="jumbotron">
         <h1 class="display-4" th:text="${totalReportedCases}"></h1>
-        <p class="lead">Total cases reported as of today</p>
+        <p class="lead">Total cases reported as of today (M/D/YYYY):</p>
+
+        <span th:text="${#temporals.format(dateTime, ' d/M/yyyy, HH:mm:ss')}"></span>
 
         <hr class="my-4">
 
@@ -40,6 +42,15 @@
             <td th:text="${locationStat.diffFromPrevDay}">0</td>
         </tr>
     </table>
+
+    <div class="container">
+        <footer>
+            &copy; 2018 Nazar Lelyak.
+            <script type="text/javascript"
+                    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            </script>
+        </footer>
+    </div>
 </div>
 </body>
 </html>
