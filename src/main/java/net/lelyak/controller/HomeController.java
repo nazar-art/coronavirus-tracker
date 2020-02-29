@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class HomeController {
     private CoronaVirusDataService virusDataService;
 
-    @GetMapping("/")
-    public String home(Model model) {
+    @GetMapping(value = {"/", "/home", "/home.html"})
+    public String homePage(Model model) {
         // sort all cases by total cases
         List<LocationStats> allStats = virusDataService.getAllStats().stream()
                 .sorted(Comparator.comparing(LocationStats::getLatestTotalCases).reversed())

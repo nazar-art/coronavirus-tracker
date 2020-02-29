@@ -39,8 +39,9 @@ public class CoronaVirusDataService {
 
     public CoronaVirusDataService(@Value("${virus.data.url}") String url) {
         log.info("DATA_URL: {}", url);
-        client = HttpClient.newHttpClient();
+
         allStats = Lists.newArrayList();
+        client = HttpClient.newHttpClient();
         request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
