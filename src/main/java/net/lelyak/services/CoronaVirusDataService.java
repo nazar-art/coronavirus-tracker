@@ -19,6 +19,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.net.http.HttpResponse.*;
@@ -35,6 +36,8 @@ public class CoronaVirusDataService {
 
     @Getter
     private List<LocationStats> allStats;
+    @Getter
+    private LocalDateTime updatedDateTime;
 
 
     public CoronaVirusDataService(@Value("${virus.data.url}") String url) {
@@ -49,8 +52,10 @@ public class CoronaVirusDataService {
 
     @SneakyThrows
     @PostConstruct
+//    @Scheduled(cron = "0 0 */1 * * *") // every hour
     @Scheduled(cron = "* * 1 * * *")
     public void fetchVirusData() {
+        log.info("Fetch is called");
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
         @Cleanup
@@ -73,7 +78,9 @@ public class CoronaVirusDataService {
 
             newStats.add(locationStat);
         }
-//        log.debug("PARSED_STAT: {}", newStats);
         this.allStats = newStats;
+        this.updatedDateTime = LocalDateTime.now();
+        log.debug("PARSED_TIME: {}", updatedDateTime);
+//        log.debug("PARSED_STAT: {}", newStats);
     }
 }
