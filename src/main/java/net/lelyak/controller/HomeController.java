@@ -1,6 +1,7 @@
 package net.lelyak.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.lelyak.model.LocationStats;
 import net.lelyak.services.CoronaVirusDataService;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 /**
  * @author Nazar Lelyak.
  */
+@Slf4j
 @Controller
 @AllArgsConstructor
 public class HomeController {
@@ -21,9 +23,9 @@ public class HomeController {
 
     @GetMapping(value = {"/", "/home", "/home.html"})
     public String homePage(Model model) {
-        // sort all cases by total cases
+        // sort all cases by new cases
         List<LocationStats> allStats = virusDataService.getAllStats().stream()
-                .sorted(Comparator.comparing(LocationStats::getLatestTotalCases).reversed())
+                .sorted(Comparator.comparing(LocationStats::getDiffFromPrevDay).reversed())
                 .collect(Collectors.toList());
 
         int totalReportedCases = allStats.stream()
@@ -39,5 +41,14 @@ public class HomeController {
         model.addAttribute("dateTime", virusDataService.getUpdatedDateTime());
 
         return "home";
+    }
+
+    /**
+     * Handling errors.
+     */
+    @GetMapping("/error")
+    public String error() {
+        log.error("Error occurred");
+        return "error";
     }
 }
