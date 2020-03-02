@@ -1,5 +1,6 @@
 package net.lelyak.utils;
 
+import lombok.experimental.UtilityClass;
 import net.lelyak.model.LocationStats;
 
 import java.util.List;
@@ -7,11 +8,12 @@ import java.util.List;
 /**
  * @author Nazar Lelyak.
  */
-public interface TestDataRepository {
+@UtilityClass
+public class TestDataRepository {
 
-    String TEST_DATA_URL = "https://raw.githubusercontent.com/nazar-art/coronavirus-tracker/master/src/test/resources/data/test_data.csv";
+    public String TEST_DATA_URL = "https://raw.githubusercontent.com/nazar-art/coronavirus-tracker/master/src/test/resources/data/test_data.csv";
 
-    List<LocationStats> TEST_STATS = List.of(LocationStats.builder()
+    public List<LocationStats> TEST_STATS = List.of(LocationStats.builder()
                     .state("Taiwan")
                     .country("Taiwan")
                     .latestTotalCases(45)

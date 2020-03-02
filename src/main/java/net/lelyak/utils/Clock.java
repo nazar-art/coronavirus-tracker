@@ -1,5 +1,6 @@
 package net.lelyak.utils;
 
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.DayOfWeek;
@@ -13,23 +14,21 @@ import java.time.LocalTime;
  * @author Nazar_Lelyak.
  */
 @Slf4j
-public final class Clock {
-    private static LocalDateTime dateTime;
+@UtilityClass
+public class Clock {
+    private LocalDateTime dateTime;
 
-    private Clock() {
-    }
-
-
-    public static LocalDateTime getCurrentDateTime() {
+    
+    public LocalDateTime getCurrentDateTime() {
         return (dateTime == null ? LocalDateTime.now() : dateTime);
     }
 
-    public static void setDateTime(LocalDateTime date) {
+    public void setDateTime(LocalDateTime date) {
         log.info("Set current date for application to: {}", date);
         Clock.dateTime = date;
     }
 
-    public static void resetDateTime() {
+    public void resetDateTime() {
         log.info("Reset date for the application");
         Clock.dateTime = LocalDateTime.now();
     }
@@ -37,15 +36,15 @@ public final class Clock {
     /**
      * Different formats for current DateTimes.
      */
-    public static LocalDate getCurrentDate() {
+    public LocalDate getCurrentDate() {
         return getCurrentDateTime().toLocalDate();
     }
 
-    public static LocalTime getCurrentTime() {
+    public LocalTime getCurrentTime() {
         return getCurrentDateTime().toLocalTime();
     }
 
-    public static DayOfWeek getCurrentDay() {
+    public DayOfWeek getCurrentDay() {
         return getCurrentDateTime().getDayOfWeek();
     }
 }
