@@ -21,7 +21,6 @@
 
     <properties>
         <java.version>12</java.version>
-        <junit.jupiter.version>5.6.0</junit.jupiter.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -58,6 +57,11 @@
             <version>1.8</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.apache.commons</groupId>-->
+<!--            <artifactId>commons-lang3</artifactId>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -88,19 +92,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Junit Platform-->
 <!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-engine</artifactId>-->
-<!--            <version>${junit.jupiter.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
-        <!--Jupiter API-->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--            <version>${junit.jupiter.version}</version>-->
+<!--            <groupId>com.github.tomakehurst</groupId>-->
+<!--            <artifactId>wiremock-jre8</artifactId>-->
+<!--            <version>2.26.1</version>-->
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
 

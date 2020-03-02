@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.lelyak.model.LocationStats;
+import net.lelyak.utils.Clock;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,10 +53,9 @@ public class CoronaVirusDataService {
 
     @SneakyThrows
     @PostConstruct
-//    @Scheduled(cron = "0 0 */1 * * *") // every hour
-    @Scheduled(cron = "* * 1 * * *")
+    @Scheduled(cron = "* */30 * * * *")
     public void fetchVirusData() {
-        log.info("Fetch is called");
+        log.debug("Fetch is called");
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
         @Cleanup
@@ -78,9 +78,11 @@ public class CoronaVirusDataService {
 
             newStats.add(locationStat);
         }
+        // save all results
         this.allStats = newStats;
-        this.updatedDateTime = LocalDateTime.now();
-        log.debug("PARSED_TIME: {}", updatedDateTime);
+        this.updatedDateTime = Clock.getCurrentDateTime();
+
+        log.info("PARSED_TIME: {}", Clock.getCurrentDateTime());
 //        log.debug("PARSED_STAT: {}", newStats);
     }
 }

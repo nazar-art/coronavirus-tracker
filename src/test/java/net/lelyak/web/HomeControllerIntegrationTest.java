@@ -4,8 +4,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import net.lelyak.controller.HomeController;
-import net.lelyak.model.LocationStats;
 import net.lelyak.services.CoronaVirusDataService;
+import net.lelyak.utils.TestDataRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,23 +45,10 @@ public class HomeControllerIntegrationTest {
     @MockBean
     private CoronaVirusDataService virusService;
 
-    private List<LocationStats> stats = List.of(LocationStats.builder()
-                    .state("Fujiyama")
-                    .country("Japan")
-                    .latestTotalCases(10)
-                    .diffFromPrevDay(0)
-                    .build(),
-            LocationStats.builder()
-                    .state("Hanoi")
-                    .country("Vietnam")
-                    .latestTotalCases(40)
-                    .diffFromPrevDay(5)
-                    .build()
-    );
 
     @Before
-    public void setUp() {
-        when(virusService.getAllStats()).thenReturn(stats);
+    public void init() {
+        when(virusService.getAllStats()).thenReturn(TestDataRepository.TEST_STATS);
         webClient = MockMvcWebClientBuilder.mockMvcSetup(mockMvc)
                 .useMockMvcForHosts("virus-tracker.com", "coronavirus.org")
                 .build();
@@ -88,6 +75,7 @@ public class HomeControllerIntegrationTest {
                 .map(DomNode::asText)
                 .collect(toList());
         // check rows with appropriate data
-        assertThat(statesList, hasItems("Hanoi\tVietnam\t40\t5", "Fujiyama\tJapan\t10\t0"));
+        System.out.println("RETURN_LIST: " + statesList);
+        assertThat(statesList, hasItems("Taiwan\tTaiwan\t45\t5", "Toronto\tCanada\t15\t5"));
     }
 }

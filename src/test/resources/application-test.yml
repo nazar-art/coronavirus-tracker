@@ -3,3 +3,8 @@
 # = LOGGING
 # ===============================
 debug: true
+
+logging:
+  level:
+    net:
+      lelyak: debug
