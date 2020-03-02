@@ -23,7 +23,7 @@ import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static java.net.http.HttpResponse.*;
+import static java.net.http.HttpResponse.BodyHandlers;
 
 /**
  * @author Nazar Lelyak.

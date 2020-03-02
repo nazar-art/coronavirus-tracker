@@ -8,7 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static net.lelyak.utils.TestDataRepository.*;
+import static net.lelyak.utils.TestDataRepository.TEST_DATA_URL;
+import static net.lelyak.utils.TestDataRepository.TEST_STATS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
