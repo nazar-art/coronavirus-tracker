@@ -44,4 +44,10 @@ public class CoronaVirusDataServiceTest {
     public void dateTimeForLastUpdateIsReturnedAsExpected() {
         assertEquals("date time should be equal to mocked", Clock.getCurrentDateTime(), virusService.getUpdatedDateTime());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ifDataUrlIsInvalidExceptionIsThrown() {
+        virusService = new CoronaVirusDataService("/incorrect-url.com");
+        virusService.fetchVirusData();
+    }
 }
