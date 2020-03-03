@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.Comparator.*;
+import static java.util.stream.Collectors.*;
 
 /**
  * @author Nazar Lelyak.
@@ -25,8 +26,10 @@ public class HomeController {
     public String homePage(Model model) {
         // sort all cases by new cases
         List<LocationStats> allStats = virusDataService.getAllStats().stream()
-                .sorted(Comparator.comparing(LocationStats::getDiffFromPrevDay).reversed())
-                .collect(Collectors.toList());
+                .sorted(comparing(LocationStats::getDiffFromPrevDay)
+                        .thenComparing(LocationStats::getLatestTotalCases)
+                        .reversed())
+                .collect(toList());
 
         int totalReportedCases = allStats.stream()
                 .mapToInt(LocationStats::getLatestTotalCases)

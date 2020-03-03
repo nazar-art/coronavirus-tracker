@@ -29,8 +29,8 @@ public class Clock {
     }
 
     public void resetDateTime() {
-        log.info("Reset date for the application");
         Clock.dateTime = LocalDateTime.now();
+        log.info("Reset date for the application to {}", getCurrentDateTime());
     }
 
     /**
