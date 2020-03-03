@@ -73,14 +73,27 @@ public class HomeControllerIntegrationTest {
     }
 
     @Test
-    public void errorRequestPathIsNotFound() throws Exception {
+    public void requestForErrorPageIsSuccessfullyProcessed() throws Exception {
+        this.mockMvc.perform(get("/error")
+                .accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(content().string(allOf(
+                        containsString("Sorry, we really did our best"),
+                        containsString("However, some shit happens sometimes :-("),
+                        containsString("Some error occurred. Sorry for inconvenience")))
+                );
+    }
+
+    @Test
+    public void wrongRequestPathIsNotFound() throws Exception {
         this.mockMvc.perform(get("/wrong")
                 .accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    public void homePageIsRenderedAsHtmlWithListOfStates() throws IOException {
+    public void homePageIsRenderedAsHtmlWithListOfCountries() throws IOException {
         HtmlPage page = webClient.getPage("http://virus-tracker.com/home.html");
         List<String> statesList = page.getElementsByTagName("tr").stream()
                 .map(DomNode::asText)
