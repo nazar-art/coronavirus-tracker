@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -71,13 +73,29 @@ public class HomeControllerIntegrationTest {
     }
 
     @Test
+    public void errorRequestPathIsNotFound() throws Exception {
+        this.mockMvc.perform(get("/wrong")
+                .accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void homePageIsRenderedAsHtmlWithListOfStates() throws IOException {
         HtmlPage page = webClient.getPage("http://virus-tracker.com/home.html");
         List<String> statesList = page.getElementsByTagName("tr").stream()
                 .map(DomNode::asText)
                 .collect(toList());
-        // check rows with appropriate data
-        System.out.println("RETURN_LIST: " + statesList);
+
         assertThat(statesList, hasItems("Taiwan\tTaiwan\t45\t5", "Toronto\tCanada\t15\t5"));
+    }
+
+    @Test(expected = UnknownHostException.class)
+    public void errorIsThrownWhenWrongHostIsProvided() throws IOException {
+        webClient.getPage("http://not-exists-url/home.html");
+    }
+
+    @Test(expected = MalformedURLException.class)
+    public void errorIsThrownWhenWrongUrlIsProvided() throws IOException {
+        webClient.getPage("/wrong-url");
     }
 }

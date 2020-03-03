@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public final class TestProfileConfigurer implements ApplicationListener<ApplicationPreparedEvent> {
 
-    private static final LocalDateTime TEST_DATE_MOCK = LocalDateTime.of(2020, 2, 29, 12, 30);
+    private static final LocalDateTime TEST_PROFILER_DATE_MOCK = LocalDateTime.of(2020, 2, 29, 12, 30);
 
     @Override
     public void onApplicationEvent(ApplicationPreparedEvent event) {
@@ -27,7 +27,7 @@ public final class TestProfileConfigurer implements ApplicationListener<Applicat
         if (environment.acceptsProfiles(Profiles.of("test"))) {
             log.info("Application is started in TEST profile");
 
-            Clock.setDateTime(TEST_DATE_MOCK);
+            Clock.setDateTime(TEST_PROFILER_DATE_MOCK);
         }
     }
 }
