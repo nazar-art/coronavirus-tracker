@@ -53,7 +53,7 @@ public class CoronaVirusDataService {
 
     @SneakyThrows
     @PostConstruct
-    @Scheduled(cron = "* */30 * * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void fetchVirusData() {
         log.debug("Fetch is called");
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());

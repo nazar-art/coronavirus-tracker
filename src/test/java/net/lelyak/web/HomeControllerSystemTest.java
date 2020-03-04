@@ -1,5 +1,6 @@
 package net.lelyak.web;
 
+import net.lelyak.utils.Clock;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +46,9 @@ public class HomeControllerSystemTest {
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(content().string(allOf(
                         containsString("Coronavirus Tracker Application"),
-                        containsString("This application lists the current number of cases reported across the globe")))
+                        containsString("This application lists the current number of cases reported across the globe"),
+                        containsString("Total cases reported as of today (M/D/YYYY):"),
+                        containsString("New cases reported since previous day:")))
                 );
     }
 }

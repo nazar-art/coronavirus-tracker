@@ -1,6 +1,6 @@
 ### Application lists the current number of cases reported across the globe
 
-Data provided from [Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE](https://github.com/CSSEGISandData/COVID-19)
+Data provided from: [Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE](https://github.com/CSSEGISandData/COVID-19)
 
 Launch main class and navigate to:
 
@@ -8,8 +8,5 @@ Launch main class and navigate to:
     
 Home page should look like:
 
-![Home page](tracker-app-look.png)    
-    
-##### to do list
-
-- [ ] add tests    
+![Home page](tracker-app-look.png)  
+  
