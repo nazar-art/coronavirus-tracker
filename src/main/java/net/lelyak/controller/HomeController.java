@@ -51,7 +51,6 @@ public class HomeController {
      */
     @GetMapping("/error")
     public String error() {
-        log.error("Error occurred");
         return "error";
     }
 }
