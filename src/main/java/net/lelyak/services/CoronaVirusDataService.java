@@ -66,8 +66,8 @@ public class CoronaVirusDataService {
         List<LocationStats> newStats = Lists.newArrayList();
         for (CSVRecord record : records) {
             // get the value from last column
-            final int localCases = Integer.parseInt(record.get(record.size() - 1));
-            final int prevDayCases = Integer.parseInt(record.get(record.size() - 2));
+            int localCases = Integer.parseInt(getColumnData(record, 1));
+            int prevDayCases = Integer.parseInt(getColumnData(record, 2));
 
             var locationStat = LocationStats.builder()
                     .state(record.get("Province/State"))
@@ -84,5 +84,10 @@ public class CoronaVirusDataService {
 
         log.info("PARSED_TIME: {}", Clock.getCurrentDateTime());
 //        log.debug("PARSED_STAT: {}", newStats);
+    }
+
+    private String getColumnData(CSVRecord record, int columnIndex) {
+        int recordSize = record.size();
+        return record.get(recordSize - columnIndex).isBlank() ? "0" : record.get(recordSize - columnIndex);
     }
 }
