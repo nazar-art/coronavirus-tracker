@@ -11,14 +11,14 @@ import java.time.LocalTime;
 /**
  * Class for controlling DateTime for the application.
  *
- * @author Nazar_Lelyak.
+ * @author Nazar Lelyak.
  */
 @Slf4j
 @UtilityClass
 public class Clock {
+
     private LocalDateTime dateTime;
 
-    
     public LocalDateTime getCurrentDateTime() {
         return (dateTime == null ? LocalDateTime.now() : dateTime);
     }

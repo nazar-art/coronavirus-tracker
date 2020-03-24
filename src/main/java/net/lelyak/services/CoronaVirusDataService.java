@@ -38,7 +38,7 @@ public class CoronaVirusDataService {
     @Getter
     private List<LocationStats> allStats;
     @Getter
-    private LocalDateTime updatedDateTime;
+    private LocalDateTime fetchDateTime;
 
 
     public CoronaVirusDataService(@Value("${virus.data.url}") String url) {
@@ -80,14 +80,20 @@ public class CoronaVirusDataService {
         }
         // save all results
         this.allStats = newStats;
-        this.updatedDateTime = Clock.getCurrentDateTime();
+        this.fetchDateTime = Clock.getCurrentDateTime();
 
         log.info("PARSED_TIME: {}", Clock.getCurrentDateTime());
 //        log.debug("PARSED_STAT: {}", newStats);
     }
 
+    /**
+     * Get the data from row record starting from the end.
+     * @param record row of the data.
+     * @param columnIndex index of column which should be returned; starting from the end.
+     * @return string value from a record row.
+     */
     private String getColumnData(CSVRecord record, int columnIndex) {
-        int recordSize = record.size();
-        return record.get(recordSize - columnIndex).isBlank() ? "0" : record.get(recordSize - columnIndex);
+        int columnsCounter = record.size();
+        return record.get(columnsCounter - columnIndex).isBlank() ? "0" : record.get(columnsCounter - columnIndex);
     }
 }

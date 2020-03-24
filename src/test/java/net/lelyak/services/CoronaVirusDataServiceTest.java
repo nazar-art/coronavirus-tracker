@@ -43,7 +43,7 @@ public class CoronaVirusDataServiceTest {
 
     @Test
     public void dateTimeForLastUpdateIsReturnedAsExpected() {
-        assertEquals("date time should be equal to mocked", Clock.getCurrentDateTime(), virusService.getUpdatedDateTime());
+        assertEquals("date time should be equal to mocked", Clock.getCurrentDateTime(), virusService.getFetchDateTime());
     }
 
     @Test(expected = IllegalArgumentException.class)

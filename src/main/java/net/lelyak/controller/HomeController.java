@@ -41,7 +41,7 @@ public class HomeController {
         model.addAttribute("totalReportedCases", totalReportedCases);
         model.addAttribute("totalNewCases", totalNewCases);
         model.addAttribute("locationStats", allStats);
-        model.addAttribute("dateTime", virusDataService.getUpdatedDateTime());
+        model.addAttribute("dateTime", virusDataService.getFetchDateTime());
 
         return "home";
     }
