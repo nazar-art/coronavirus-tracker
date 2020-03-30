@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -41,9 +42,9 @@ public class HomeControllerSystemTest {
     @Test
     public void allDataFromDataSourceAreAvailableOnWeb() throws Exception {
         this.mockMvc.perform(get("/home.html")
-                .accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+                .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(content().contentType(APPLICATION_JSON))
                 .andExpect(content().string(allOf(
                         containsString("Coronavirus Tracker Application"),
                         containsString("This application lists the current number of cases reported across the globe"),

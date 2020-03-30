@@ -29,6 +29,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -61,10 +62,10 @@ public class HomeControllerIntegrationTest {
     @Test
     public void requestForVirusDataIsSuccessfullyProcessed() throws Exception {
         this.mockMvc.perform(get("/")
-                .accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+                .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
 
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(content().contentType(APPLICATION_JSON))
                 .andExpect(content().string(allOf(
                         containsString("Coronavirus Tracker Application"),
                         containsString("This application lists the current number of cases reported across the globe"),
@@ -76,9 +77,9 @@ public class HomeControllerIntegrationTest {
     @Test
     public void requestForErrorPageIsSuccessfullyProcessed() throws Exception {
         this.mockMvc.perform(get("/error")
-                .accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+                .accept(APPLICATION_JSON))
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(content().contentType(APPLICATION_JSON))
                 .andExpect(content().string(allOf(
                         containsString("Sorry, we really did our best"),
                         containsString("However, some shit happens sometimes :-("),
@@ -89,7 +90,7 @@ public class HomeControllerIntegrationTest {
     @Test
     public void wrongRequestPathIsNotFound() throws Exception {
         this.mockMvc.perform(get("/wrong")
-                .accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+                .accept(APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
