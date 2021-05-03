@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -65,7 +64,7 @@ public class HomeControllerIntegrationTest {
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
 
-                .andExpect(content().contentType(APPLICATION_JSON))
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(content().string(allOf(
                         containsString("Coronavirus Tracker Application"),
                         containsString("This application lists the current number of cases reported across the globe"),
@@ -78,8 +77,8 @@ public class HomeControllerIntegrationTest {
     public void requestForErrorPageIsSuccessfullyProcessed() throws Exception {
         this.mockMvc.perform(get("/error")
                 .accept(APPLICATION_JSON))
-                .andExpect(status().isInternalServerError())
-                .andExpect(content().contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(content().string(allOf(
                         containsString("Sorry, we really did our best"),
                         containsString("However, some shit happens sometimes :-("),

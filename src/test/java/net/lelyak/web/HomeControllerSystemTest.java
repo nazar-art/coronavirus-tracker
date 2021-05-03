@@ -1,12 +1,10 @@
 package net.lelyak.web;
 
-import net.lelyak.utils.Clock;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -44,7 +42,7 @@ public class HomeControllerSystemTest {
         this.mockMvc.perform(get("/home.html")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(APPLICATION_JSON))
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(content().string(allOf(
                         containsString("Coronavirus Tracker Application"),
                         containsString("This application lists the current number of cases reported across the globe"),
