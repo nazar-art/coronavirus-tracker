@@ -20,7 +20,8 @@ import static java.util.stream.Collectors.*;
 @Controller
 @AllArgsConstructor
 public class HomeController {
-    private CoronaVirusDataService virusDataService;
+
+    private final CoronaVirusDataService virusDataService;
 
     @GetMapping(value = {"/", "/home", "/home.html"})
     public String homePage(Model model) {

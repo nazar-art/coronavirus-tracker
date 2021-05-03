@@ -32,8 +32,8 @@ import static java.net.http.HttpResponse.BodyHandlers;
 @Service
 public class CoronaVirusDataService {
 
-    private HttpClient client;
-    private HttpRequest request;
+    private final HttpClient client;
+    private final HttpRequest request;
 
     @Getter
     private List<LocationStats> allStats;
@@ -53,7 +53,8 @@ public class CoronaVirusDataService {
 
     @SneakyThrows
     @PostConstruct
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 0 * * * *") // every hour
+//    @Scheduled(cron = "0/5 * * * * *") // every hour
     public void fetchVirusData() {
         log.debug("Fetch is called");
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
