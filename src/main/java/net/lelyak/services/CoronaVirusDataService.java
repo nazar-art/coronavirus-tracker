@@ -54,6 +54,7 @@ public class CoronaVirusDataService {
     @SneakyThrows
     @PostConstruct
     @Scheduled(cron = "0 0 * * * *") // every hour
+//    @Scheduled(cron = "0 0 */2 * * *") // every 2 hour
 //    @Scheduled(cron = "0/5 * * * * *") // every hour
     public void fetchVirusData() {
         log.debug("Fetch is called");

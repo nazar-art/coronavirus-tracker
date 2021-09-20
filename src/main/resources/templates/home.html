@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Coronavirus Tracker Application</title>
+    <title class="flex-header">Coronavirus Tracker Application</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
@@ -17,8 +17,10 @@
     <p>This application lists the current number of cases reported across the globe</p>
 
     <div class="jumbotron">
-        <h1 class="display-4" th:text="${totalReportedCases}"></h1>
-        <p class="lead">Total cases reported as of today (M/D/YYYY):
+        <h1 class="display-4"
+            th:text="${#numbers.formatInteger(totalReportedCases, 1 ,'WHITESPACE')}">
+        </h1>
+        <p class="lead">Total cases reported as of today (D/M/YYYY):
             <span th:text="${#temporals.format(dateTime, ' d/M/yyyy, HH:mm:ss')}"></span>
         </p>
 
@@ -26,7 +28,7 @@
 
         <p>
             <span>New cases reported since previous day:</span>
-            <span th:text="${totalNewCases}"></span>
+            <span th:text="${#numbers.formatInteger(totalNewCases, 1 ,'WHITESPACE')}"></span>
         </p>
     </div>
 
@@ -40,8 +42,8 @@
         <tr th:each="locationStat : ${locationStats}">
             <td th:text="${locationStat.state}"></td>
             <td th:text="${locationStat.country}"></td>
-            <td th:text="${locationStat.latestTotalCases}">0</td>
-            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+            <td th:text="${#numbers.formatInteger(locationStat.latestTotalCases, 1 ,'WHITESPACE')}">0</td>
+            <td th:text="${#numbers.formatInteger(locationStat.diffFromPrevDay, 1 ,'WHITESPACE')}">0</td>
         </tr>
     </table>
 
