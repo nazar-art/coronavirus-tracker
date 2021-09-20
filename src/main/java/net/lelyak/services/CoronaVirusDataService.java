@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.lelyak.model.LocationStats;
-import net.lelyak.utils.Clock;
+import net.lelyak.utils.TimeClock;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +20,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static java.net.http.HttpResponse.BodyHandlers;
@@ -38,7 +38,7 @@ public class CoronaVirusDataService {
     @Getter
     private List<LocationStats> allStats;
     @Getter
-    private LocalDateTime fetchDateTime;
+    private ZonedDateTime fetchDateTime;
 
 
     public CoronaVirusDataService(@Value("${virus.data.url}") String url) {
@@ -81,9 +81,9 @@ public class CoronaVirusDataService {
         }
         // save all results
         this.allStats = newStats;
-        this.fetchDateTime = Clock.getCurrentDateTime();
+        this.fetchDateTime = TimeClock.getCurrentDateTime();
 
-        log.info("PARSED_TIME: {}", Clock.getCurrentDateTime());
+        log.info("PARSED_TIME: {}", TimeClock.getCurrentDateTime());
 //        log.debug("PARSED_STAT: {}", newStats);
     }
 

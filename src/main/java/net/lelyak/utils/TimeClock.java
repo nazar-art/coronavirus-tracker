@@ -5,8 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
  * Class for controlling DateTime for the application.
@@ -15,22 +16,24 @@ import java.time.LocalTime;
  */
 @Slf4j
 @UtilityClass
-public class Clock {
+public class TimeClock {
 
-    private LocalDateTime dateTime;
+    public static final ZoneId TIME_ZONE_UTC = ZoneId.of("UTC");
 
-    public LocalDateTime getCurrentDateTime() {
-        return (dateTime == null ? LocalDateTime.now() : dateTime);
+    private ZonedDateTime dateTime;
+
+    public ZonedDateTime getCurrentDateTime() {
+        return (dateTime == null ? ZonedDateTime.now(TIME_ZONE_UTC) : dateTime);
     }
 
-    public void setDateTime(LocalDateTime date) {
+    public void setDateTime(ZonedDateTime date) {
         log.info("Set current date for application to: {}", date);
-        Clock.dateTime = date;
+        TimeClock.dateTime = date;
     }
 
     public void resetDateTime() {
-        Clock.dateTime = LocalDateTime.now();
-        log.info("Reset date for the application to {}", getCurrentDateTime());
+        log.info("Reset date for the application");
+        TimeClock.dateTime = ZonedDateTime.now(TIME_ZONE_UTC);
     }
 
     /**

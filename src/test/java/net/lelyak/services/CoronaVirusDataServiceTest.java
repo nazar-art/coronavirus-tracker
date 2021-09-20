@@ -1,6 +1,6 @@
 package net.lelyak.services;
 
-import net.lelyak.utils.Clock;
+import net.lelyak.utils.TimeClock;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +43,7 @@ public class CoronaVirusDataServiceTest {
 
     @Test
     public void dateTimeForLastUpdateIsReturnedAsExpected() {
-        assertEquals("date time should be equal to mocked", Clock.getCurrentDateTime(), virusService.getFetchDateTime());
+        assertEquals("date time should be equal to mocked", TimeClock.getCurrentDateTime(), virusService.getFetchDateTime());
     }
 
     @Test(expected = IllegalArgumentException.class)
