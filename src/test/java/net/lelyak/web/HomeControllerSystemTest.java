@@ -46,7 +46,7 @@ public class HomeControllerSystemTest {
                 .andExpect(content().string(allOf(
                         containsString("Coronavirus Tracker Application"),
                         containsString("This application lists the current number of cases reported across the globe"),
-                        containsString("Total cases reported as of today (M/D/YYYY):"),
+                        containsString("Total cases reported as of today (D/M/YYYY):"),
                         containsString("New cases reported since previous day:")))
                 );
     }
