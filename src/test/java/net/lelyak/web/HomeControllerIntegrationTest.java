@@ -1,18 +1,18 @@
 package net.lelyak.web;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import net.lelyak.controller.HomeController;
 import net.lelyak.services.CoronaVirusDataService;
 import net.lelyak.utils.TestDataRepository;
+import org.htmlunit.WebClient;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder;
@@ -26,7 +26,7 @@ import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,9 +46,8 @@ public class HomeControllerIntegrationTest {
 
     private WebClient webClient;
 
-    @MockBean
+    @MockitoBean
     private CoronaVirusDataService virusService;
-
 
     @Before
     public void init() {
@@ -97,7 +96,7 @@ public class HomeControllerIntegrationTest {
     public void homePageIsRenderedAsHtmlWithListOfCountries() throws IOException {
         HtmlPage page = webClient.getPage("http://virus-tracker.com/home.html");
         List<String> statesList = page.getElementsByTagName("tr").stream()
-                .map(DomNode::asText)
+                .map(DomNode::asNormalizedText)
                 .collect(toList());
 
         assertThat(statesList, hasItems("Taiwan\tTaiwan\t45\t5", "Toronto\tCanada\t15\t5"));

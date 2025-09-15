@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static net.lelyak.utils.TestDataRepository.TEST_DATA_URL;
 import static net.lelyak.utils.TestDataRepository.TEST_STATS;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 /**
  * @author Nazar Lelyak.
@@ -35,9 +35,9 @@ public class CoronaVirusDataServiceTest {
     public void locationStatsAreReturnedAfterExecutionAsExpected() {
         assertNotNull("virus service must not be null", virusService.getAllStats());
 
-        assertTrue(virusService.getAllStats().size() > 0);
+        assertFalse(virusService.getAllStats().isEmpty());
 
-        assertEquals(TEST_STATS.size(), 2);
+        assertEquals(2, TEST_STATS.size());
         assertEquals("local stats should be equal", TEST_STATS, virusService.getAllStats());
     }
 
